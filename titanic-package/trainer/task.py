@@ -10,7 +10,7 @@ import pickle
 import subprocess
 
 
-def load_data_from_bq(bq_uri: str) -> pd.DataFrame:
+def load_data_from_bq(bq_uri2: str) -> pd.DataFrame:
     """
     Loads data from BigQuery table (BQ) to a dataframe
 
@@ -19,6 +19,7 @@ def load_data_from_bq(bq_uri: str) -> pd.DataFrame:
             Returns:
                     pandas.DataFrame: a dataframe with the data from GCP loaded
     """
+    # bq_uri = "bq://titanic-problem.titanic.survivors"
     if not bq_uri.startswith("bq://"):
         raise Exception(
             "uri is not a BQ uri. It should be bq://project_id.dataset.table"
@@ -212,7 +213,7 @@ if __name__ == "__main__":
     # Add code for dumping the model to GCS
     model.dump_model()
 
-    gcs_bucket = os.environ["BUCKET_NAME"]
+    # gcs_bucket = "titanic-problem-bucket"
     gcs_model_path = f"gs://{gcs_bucket}/model/model.pkl"
 
     subprocess.run(
